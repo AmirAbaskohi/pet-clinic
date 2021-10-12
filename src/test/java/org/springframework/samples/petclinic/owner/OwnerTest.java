@@ -19,4 +19,17 @@ class OwnerTest {
         assertEquals(owner.getTelephone(), "09392324236");
     }
 
+    @Test
+    public void testSetGetCity() {
+        owner.setCity("Tehran");
+        assertEquals(owner.getCity(), "Tehran");
+    }
+
+    @Test
+    public void testSetGetAddress() {
+        owner.setAddress("Tehran, Pelak 255");
+        assertEquals(owner.getAddress(), "Tehran, Pelak 255");
+    }
+
+    
 }
