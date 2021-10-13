@@ -18,7 +18,6 @@ class OwnerTest {
     private Pet pet4 = new Pet();
     private Pet pet5 = new Pet();
 
-
     @BeforeEach
     public void setup() {
         owner = new Owner();
@@ -54,9 +53,9 @@ class OwnerTest {
 
         owner.setPetsInternal(pets);
 
-        assertTrue(owner.getPetsInternal().size() == pets.size() && 
-        owner.getPetsInternal().containsAll(pets) && 
-        pets.containsAll(owner.getPetsInternal()));
+        assertTrue(owner.getPetsInternal().size() == pets.size());
+        assertTrue(owner.getPetsInternal().containsAll(pets));
+        assertTrue(pets.containsAll(owner.getPetsInternal()));
 
     }
 
@@ -66,9 +65,9 @@ class OwnerTest {
 
         owner.setPetsInternal(pets);
 
-        assertTrue(owner.getPets().size() == pets.size() && 
-        owner.getPets().containsAll(pets) && 
-        pets.containsAll(owner.getPets()));
+        assertTrue(owner.getPets().size() == pets.size()); 
+        assertTrue(owner.getPets().containsAll(pets)); 
+        assertTrue(pets.containsAll(owner.getPets()));
     }
 
     @Test
@@ -77,15 +76,15 @@ class OwnerTest {
 
         owner.addPet(pet5);
         
-        assertTrue(owner.getPets().size() == petsBeforeAdd.size() + 1 && 
-        owner.getPets().containsAll(petsBeforeAdd) &&
-        owner.getPets().contains(pet5));
+        assertTrue(owner.getPets().size() == petsBeforeAdd.size() + 1); 
+        assertTrue(owner.getPets().containsAll(petsBeforeAdd));
+        assertTrue(owner.getPets().contains(pet5));
 
         owner.addPet(pet5); // add duplicate pet
 
-        assertTrue(owner.getPets().size() == petsBeforeAdd.size() + 1 && 
-        owner.getPets().containsAll(petsBeforeAdd) &&
-        owner.getPets().contains(pet5));
+        assertTrue(owner.getPets().size() == petsBeforeAdd.size() + 1); 
+        assertTrue(owner.getPets().containsAll(petsBeforeAdd));
+        assertTrue(owner.getPets().contains(pet5));
     }
 
     @Test
@@ -95,14 +94,14 @@ class OwnerTest {
 
         owner.removePet(pet4);
 
-        assertTrue(owner.getPets().size() == petsBeforeRemove.size() - 1 &&
-        petsBeforeRemove.containsAll(owner.getPets()) &&
-        !owner.getPets().contains(pet4));
+        assertTrue(owner.getPets().size() == petsBeforeRemove.size() - 1);
+        assertTrue(petsBeforeRemove.containsAll(owner.getPets()));
+        assertTrue(!owner.getPets().contains(pet4));
 
         owner.removePet(pet4); // remove duplicate pet
 
-        assertTrue(owner.getPets().size() == petsBeforeRemove.size() - 1 &&
-        petsBeforeRemove.containsAll(owner.getPets()) &&
-        !owner.getPets().contains(pet4));
+        assertTrue(owner.getPets().size() == petsBeforeRemove.size() - 1);
+        assertTrue(petsBeforeRemove.containsAll(owner.getPets()));
+        assertTrue(!owner.getPets().contains(pet4));
     }
 }
