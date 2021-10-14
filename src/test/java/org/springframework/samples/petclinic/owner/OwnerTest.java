@@ -23,6 +23,13 @@ class OwnerTest {
         owner = new Owner();
 
         pets = new HashSet<>();
+
+        pet1.setName("Pet1");
+        pet2.setName("Pet2");
+        pet3.setName("Pet3");
+        pet4.setName("Pet4");
+        pet5.setName("Pet5");
+
         pets.add(pet1);
         pets.add(pet2);
         pets.add(pet3);
@@ -103,5 +110,29 @@ class OwnerTest {
         assertTrue(owner.getPets().size() == petsBeforeRemove.size() - 1);
         assertTrue(petsBeforeRemove.containsAll(owner.getPets()));
         assertTrue(!owner.getPets().contains(pet4));
+    }
+
+    @Test
+    public void getPetTest(){
+        owner.setPetsInternal(pets);
+        
+        assertTrue(owner.getPet("Pet1").getName() == "Pet1");
+        assertTrue(owner.getPet("Pet1000") == null);
+    }
+
+    @Test
+    public void getPetWithIgnoreNewTest(){
+        owner.setPetsInternal(pets);
+        
+        assertTrue(owner.getPet("Pet1", true) == null);
+        assertTrue(owner.getPet("Pet1", false).getName() == "Pet1");
+
+        owner.getPet("Pet1", false).setId(1);
+
+        assertTrue(owner.getPet("Pet1", true).getName() == "Pet1");
+        assertTrue(owner.getPet("Pet1", false).getName() == "Pet1");
+
+        assertTrue(owner.getPet("Pet1000", true) == null);
+        assertTrue(owner.getPet("Pet1000", false) == null);
     }
 }
