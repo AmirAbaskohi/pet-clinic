@@ -1,13 +1,10 @@
 package org.springframework.samples.petclinic.owner;
 
 import static org.junit.Assert.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.*;
 import java.util.*;
 
-class OwnerTest {
+public class OwnerTest {
 
     private Owner owner;
     private Set<Pet> pets;
@@ -18,7 +15,7 @@ class OwnerTest {
     private final Pet pet4 = new Pet();
     private final Pet pet5 = new Pet();
 
-    @BeforeEach
+    @Before
     public void setup() {
         owner = new Owner();
 

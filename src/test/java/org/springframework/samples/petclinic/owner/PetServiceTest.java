@@ -6,8 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 import org.springframework.samples.petclinic.utility.PetTimedCache;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -19,8 +18,6 @@ import java.util.*;
 
 @RunWith(Parameterized.class)
 public class PetServiceTest {
-
-    private final PetTimedCache cache;
 
 	public int petId;
 	public Pet pet;
@@ -43,7 +40,7 @@ public class PetServiceTest {
 
     	this.petId = petId;
     	this.pet = pet;
-        cache = mock(PetTimedCache.class);
+		PetTimedCache cache = mock(PetTimedCache.class);
         Logger logger = LoggerFactory.getLogger("test");
         petService = new PetService(cache, ownerRepository, logger);
 
