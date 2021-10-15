@@ -12,11 +12,11 @@ class OwnerTest {
     private Owner owner;
     private Set<Pet> pets;
 
-    private Pet pet1 = new Pet();
-    private Pet pet2 = new Pet();
-    private Pet pet3 = new Pet();
-    private Pet pet4 = new Pet();
-    private Pet pet5 = new Pet();
+    private final Pet pet1 = new Pet();
+    private final Pet pet2 = new Pet();
+    private final Pet pet3 = new Pet();
+    private final Pet pet4 = new Pet();
+    private final Pet pet5 = new Pet();
 
     @BeforeEach
     public void setup() {
@@ -56,24 +56,24 @@ class OwnerTest {
 
     @Test
     public void setGetPetsInternalTest(){
-        assertTrue(owner.getPetsInternal().size() == 0); // for empty set of pets
+		assertEquals(0, owner.getPetsInternal().size()); // for empty set of pets
 
         owner.setPetsInternal(pets);
 
-        assertTrue(owner.getPetsInternal().size() == pets.size());
+		assertEquals(owner.getPetsInternal().size(), pets.size());
         assertTrue(owner.getPetsInternal().containsAll(pets));
         assertTrue(pets.containsAll(owner.getPetsInternal()));
 
     }
 
-    @Test 
+    @Test
     public void getPetsTest(){
-        assertTrue(owner.getPets().size() == 0); // for empty set of pets
+		assertEquals(0, owner.getPets().size()); // for empty set of pets
 
         owner.setPetsInternal(pets);
 
-        assertTrue(owner.getPets().size() == pets.size()); 
-        assertTrue(owner.getPets().containsAll(pets)); 
+		assertEquals(owner.getPets().size(), pets.size());
+        assertTrue(owner.getPets().containsAll(pets));
         assertTrue(pets.containsAll(owner.getPets()));
     }
 
@@ -82,14 +82,14 @@ class OwnerTest {
         List<Pet> petsBeforeAdd = owner.getPets();
 
         owner.addPet(pet5);
-        
-        assertTrue(owner.getPets().size() == petsBeforeAdd.size() + 1); 
+
+		assertEquals(owner.getPets().size(), petsBeforeAdd.size() + 1);
         assertTrue(owner.getPets().containsAll(petsBeforeAdd));
         assertTrue(owner.getPets().contains(pet5));
 
         owner.addPet(pet5); // add duplicate pet
 
-        assertTrue(owner.getPets().size() == petsBeforeAdd.size() + 1); 
+		assertEquals(owner.getPets().size(), petsBeforeAdd.size() + 1);
         assertTrue(owner.getPets().containsAll(petsBeforeAdd));
         assertTrue(owner.getPets().contains(pet5));
     }
@@ -101,38 +101,38 @@ class OwnerTest {
 
         owner.removePet(pet4);
 
-        assertTrue(owner.getPets().size() == petsBeforeRemove.size() - 1);
+		assertEquals(owner.getPets().size(), petsBeforeRemove.size() - 1);
         assertTrue(petsBeforeRemove.containsAll(owner.getPets()));
-        assertTrue(!owner.getPets().contains(pet4));
+		assertFalse(owner.getPets().contains(pet4));
 
         owner.removePet(pet4); // remove duplicate pet
 
-        assertTrue(owner.getPets().size() == petsBeforeRemove.size() - 1);
+		assertEquals(owner.getPets().size(), petsBeforeRemove.size() - 1);
         assertTrue(petsBeforeRemove.containsAll(owner.getPets()));
-        assertTrue(!owner.getPets().contains(pet4));
+		assertFalse(owner.getPets().contains(pet4));
     }
 
     @Test
     public void getPetTest(){
         owner.setPetsInternal(pets);
-        
-        assertTrue(owner.getPet("Pet1").getName() == "Pet1");
-        assertTrue(owner.getPet("Pet1000") == null);
+
+        assertEquals(owner.getPet("Pet1") , pet1);
+		assertNull(owner.getPet("Pet1000"));
     }
 
     @Test
     public void getPetWithIgnoreNewTest(){
         owner.setPetsInternal(pets);
-        
-        assertTrue(owner.getPet("Pet1", true) == null);
-        assertTrue(owner.getPet("Pet1", false).getName() == "Pet1");
+
+		assertNull(owner.getPet("Pet1", true));
+		assertEquals(owner.getPet("Pet1", false) , pet1);
 
         owner.getPet("Pet1", false).setId(1);
 
-        assertTrue(owner.getPet("Pet1", true).getName() == "Pet1");
-        assertTrue(owner.getPet("Pet1", false).getName() == "Pet1");
+        assertEquals(owner.getPet("Pet1", true) , pet1);
+		assertEquals(owner.getPet("Pet1", false) , pet1);
 
-        assertTrue(owner.getPet("Pet1000", true) == null);
-        assertTrue(owner.getPet("Pet1000", false) == null);
+		assertNull(owner.getPet("Pet1000", true));
+		assertNull(owner.getPet("Pet1000", false));
     }
 }
