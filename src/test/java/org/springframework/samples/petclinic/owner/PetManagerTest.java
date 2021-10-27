@@ -18,7 +18,6 @@ import org.springframework.samples.petclinic.utility.SimpleDI;
 import org.springframework.samples.petclinic.visit.Visit;
 
 
-@RunWith(MockitoJUnitRunner.class)
 public class PetManagerTest {
 	private PetTimedCache mockPets;
 	private OwnerRepository mockOwners;
@@ -33,7 +32,7 @@ public class PetManagerTest {
 		petManager = new PetManager(mockPets, mockOwners, mockLogger);
 	}
 
-	/** mock + dummy , state verification, Mockisty **/
+	/** stub + dummy , state verification, Mockisty **/
 	@Test
 	public void findOwnerStateTest(){
 		Owner dummyOwner = mock(Owner.class); //dummy
@@ -66,7 +65,7 @@ public class PetManagerTest {
 		verify(spyOwner).addPet(any(Pet.class));
 	}
 
-	/** mock + dummy , state verification, Mockisty **/
+	/** stub + dummy , state verification, Mockisty **/
 	@Test
 	public void findPetStateTest(){
 		Pet dummyPet = mock(Pet.class);
@@ -81,7 +80,7 @@ public class PetManagerTest {
 		verify(mockLogger).info("find pet by id {}", 5);
 	}
 
-	/** spy + stub, behavior verification, classical **/
+	/** spy, behavior verification, classical **/
 	@Test
 	public void savePetLoggerBehaviorTest(){
 		Owner owner = new Owner();
@@ -110,7 +109,7 @@ public class PetManagerTest {
 		verify(mockPets).save(dummyPet);
 	}
 
-	/** mock + dummy, state verification, Mockisty **/
+	/** stub + dummy, state verification, Mockisty **/
 	@Test
 	public void getOwnerPetsStateTest(){
 		Pet dummyPet1 = mock(Pet.class);
@@ -125,7 +124,7 @@ public class PetManagerTest {
 		assertEquals(dummyPets, petManager.getOwnerPets(5));
 	}
 
-	/** mock + spy + dummy, behavior verification, Mockisty **/
+	/** spy + dummy, behavior verification, Mockisty **/
 	@Test
 	public void getOwnerPetsLoggerBehaviorTest(){
 		Owner dummyOwner = mock(Owner.class);
@@ -134,7 +133,7 @@ public class PetManagerTest {
 		verify(mockLogger).info("finding the owner's pets by id {}", 5);
 	}
 
-	/** mock + dummy, state verification, Mockisty **/
+	/** stub + dummy, state verification, Mockisty **/
 	@Test
 	public void getOwnerPetTypesStateTest(){
 		PetType dummyPetType1 = mock(PetType.class);
@@ -153,7 +152,7 @@ public class PetManagerTest {
 		assertEquals(dummyPetTypes, petManager.getOwnerPetTypes(5));
 	}
 
-	/** mock + spy + dummy, behavior verification, Mockisty **/
+	/** spy + dummy, behavior verification, Mockisty **/
 	@Test
 	public void getOwnerPetTypesLoggerBehaviorTest(){
 		Pet dummyPet1 = mock(Pet.class);
@@ -169,7 +168,7 @@ public class PetManagerTest {
 		verify(mockLogger).info("finding the owner's petTypes by id {}", 5);
 	}
 
-	/** mock + dummy, state verification, classical **/
+	/** stub + dummy, state verification, classical **/
 	@Test
 	public void getVisitsBetweenStateTest(){
 		Pet mockPet = mock(Pet.class);
