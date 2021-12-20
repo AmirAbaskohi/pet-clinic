@@ -1,8 +1,7 @@
 package org.springframework.samples.petclinic.utility;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.samples.petclinic.owner.Pet;
 import org.springframework.samples.petclinic.visit.Visit;
@@ -24,7 +23,7 @@ public class PriceCalculatorTest {
 	List<Visit> visits, visits1, visits2, visits3, visits4;
 	Visit visit1, visit2, visit3, visit4;
 
-	@Before
+	@BeforeEach
 	public void setup(){
 		pet1 = mock(Pet.class);
 		pet2 = mock(Pet.class);
@@ -127,8 +126,6 @@ public class PriceCalculatorTest {
 		when(pet6.getBirthDate()).thenReturn(LocalDate.now().minusYears(2));
 		when(pet7.getBirthDate()).thenReturn(LocalDate.now().minusYears(2));
 		when(pet8.getBirthDate()).thenReturn(LocalDate.now().minusYears(2));
-		when(pet9.getBirthDate()).thenReturn(LocalDate.now().minusYears(2));
-//		when(pet10.getBirthDate()).thenReturn(LocalDate.now().minusYears(2));
 
 		pets.add(pet1);
 		pets.add(pet2);
@@ -138,8 +135,6 @@ public class PriceCalculatorTest {
 		pets.add(pet6);
 		pets.add(pet7);
 		pets.add(pet8);
-		pets.add(pet9);
-//		pets.add(pet5);
 
 		visits1.add(visit1);
 		visits2.addAll(visits1);
@@ -159,6 +154,6 @@ public class PriceCalculatorTest {
 		when(pet8.getVisitsUntilAge(anyInt())).thenReturn(visits4);
 
 		double ans = PriceCalculator.calcPrice(pets, 1.5, 1.5);
-		assertEquals(2643.54, ans, delta);
+		assertEquals(1319.76, ans, delta);
 	}
 }
