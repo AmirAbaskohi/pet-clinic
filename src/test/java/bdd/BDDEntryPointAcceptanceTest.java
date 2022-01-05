@@ -12,5 +12,4 @@ import org.junit.runner.RunWith;
 	plugin = {"pretty", "summary" ,"html:target/cucumber/cucumber.html", "json:target/cucumber.json"},
 	features = {"classpath:features/"})
 public class BDDEntryPointAcceptanceTest {
-
 }
